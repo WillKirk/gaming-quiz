@@ -5,22 +5,30 @@ let currentIndex = 0;
 let score = 0;
 
 async function fetchQuestions() {
-    const response = await fetch(API_URL);
-    // const response = await fetch('questions.json');
-    const data = await response.json();
-
-    console.log(data);
-
-    questions = data.results.map(function(question){
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+  
+      if (data.response_code !== 0) {
+        throw new Error('API error: ' + data.response_code);
+      }
+  
+      questions = data.results.map(function(question) {
         return {
-            question: decodeHTML(question.question),
-            correct_answer: decodeHTML(question.correct_answer),
-            incorrect_answers: question.incorrect_answers.map(decodeHTML),
+          question: decodeHTML(question.question),
+          correct_answer: decodeHTML(question.correct_answer),
+          incorrect_answers: question.incorrect_answers.map(decodeHTML)
         };
-    });
-
-    renderQuestion();
-}
+      });
+  
+      renderQuestion();
+  
+    } catch (error) {
+      console.error(error);
+      document.getElementById('question-text').textContent = 'Loading...';
+      setTimeout(fetchQuestions, 3000);
+    }
+  }
 
 
 function decodeHTML(html) {
@@ -49,6 +57,8 @@ function shuffleAnswers(question){
 
 function renderQuestion() {
     document.getElementById('feedback').innerHTML = '';
+    document.getElementById('question-counter').textContent = 'Question ' + (currentIndex + 1) + ' / ' + questions.length;
+    document.getElementById('score-tracker').textContent = 'Score: ' + score + ' / ' + questions.length;
 
     const question = questions[currentIndex];
     const answers = shuffleAnswers(question);
@@ -83,8 +93,9 @@ function handleAnswers(selected, correct) {
     }
   
     if (selected === correct) {
-      score = score + 1;
-    }
+        score = score + 1;
+        document.getElementById('score-tracker').textContent = 'Score: ' + score + ' / ' + questions.length;
+      }
   
     const feedback = document.getElementById('feedback');
     if (selected === correct) {
