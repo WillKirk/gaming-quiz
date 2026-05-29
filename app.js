@@ -4,6 +4,25 @@ let questions = [];
 let currentIndex = 0;
 let score = 0;
 
+async function fetchQuestions() {
+    const response = await fetch(API_URL);
+    // const response = await fetch('questions.json');
+    const data = await response.json();
+
+    console.log(data);
+
+    questions = data.results.map(function(question){
+        return {
+            question: decodeHTML(question.question),
+            correct_answer: decodeHTML(question.correct_answer),
+            incorrect_answers: question.incorrect_answers.map(decodeHTML),
+        };
+    });
+
+    renderQuestion();
+}
+
+
 function decodeHTML(html) {
     const textarea = document.createElement('textarea');
     textarea.innerHTML = html;
@@ -86,25 +105,39 @@ function handleAnswers(selected, correct) {
     });
   
     document.getElementById('feedback').appendChild(nextButton);
-  }
-
-async function fetchQuestions() {
-    // const response = await fetch(API_URL);
-    const response = await fetch('questions.json');
-    const data = await response.json();
-
-    console.log(data);
-
-    questions = data.map(function(question){
-        return {
-            question: decodeHTML(question.question),
-            correct_answer: decodeHTML(question.correct_answer),
-            incorrect_answers: question.incorrect_answers.map(decodeHTML),
-        };
-    });
-
-    renderQuestion();
 }
+
+function showScore() {
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+  
+    const heading = document.createElement('h1');
+    heading.textContent = 'Quiz Complete!';
+  
+    const scoreText = document.createElement('p');
+    scoreText.textContent = 'You scored ' + score + ' out of ' + questions.length;
+  
+    const restartButton = document.createElement('button');
+    restartButton.textContent = 'Play Again';
+    restartButton.addEventListener('click', function() {
+      score = 0;
+      currentIndex = 0;
+      app.innerHTML = `
+        <div id="question-container">
+          <p id="question-text"></p>
+          <div id="answers-container"></div>
+          <p id="feedback"></p>
+        </div>
+      `;
+      fetchQuestions();
+    });
+  
+    app.appendChild(heading);
+    app.appendChild(scoreText);
+    app.appendChild(restartButton);
+}
+
+
 
 fetchQuestions();
 
