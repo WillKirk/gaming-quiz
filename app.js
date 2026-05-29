@@ -134,12 +134,15 @@ function showScore() {
       score = 0;
       currentIndex = 0;
       app.innerHTML = `
-        <div id="question-container">
-          <p id="question-text"></p>
-          <div id="answers-container"></div>
-          <p id="feedback"></p>
-        </div>
-      `;
+      <h1 id="title">🎮 Gaming Quiz</h1>
+      <p id="score-tracker">Score: 0 / 10</p>
+      <div id="question-container">
+        <p id="question-counter"></p>
+        <p id="question-text"></p>
+        <div id="answers-container"></div>
+        <p id="feedback"></p>
+      </div>
+    `;
       fetchQuestions();
     });
   
