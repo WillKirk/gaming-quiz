@@ -1,0 +1,92 @@
+[
+    {
+      "question": "In Monster Hunter Generations, which of the following monsters are a part of the \"Fated Four\"?",
+      "correct_answer": "Astalos",
+      "incorrect_answers": [
+        "Gore Magala",
+        "Malfestio",
+        "Arzuros"
+      ]
+    },
+    {
+      "question": "What is the name of the protagonist of Life Is Strange?",
+      "correct_answer": "Max Caulfield",
+      "incorrect_answers": [
+        "Frank Bowers",
+        "Rachel Amber",
+        "Kate Marsh"
+      ]
+    },
+    {
+      "question": "Who is the main character in the video game \"Just Cause 3\"?",
+      "correct_answer": "Rico Rodriguez",
+      "incorrect_answers": [
+        "Tom Sheldon",
+        "Marcus Holloway",
+        "Mario Frigo"
+      ]
+    },
+    {
+      "question": "What block in Minecraft has the highest blast resistance?",
+      "correct_answer": "Barrier",
+      "incorrect_answers": [
+        "Obsidian",
+        "Bedrock",
+        "Block of Diamond"
+      ]
+    },
+    {
+      "question": "What is the name the location-based augmented reality game developed by Niantic before Pokémon GO?",
+      "correct_answer": "Ingress",
+      "incorrect_answers": [
+        "Aggress",
+        "Regress",
+        "Digress"
+      ]
+    },
+    {
+      "question": "How many classes are there in Team Fortress 2?",
+      "correct_answer": "9",
+      "incorrect_answers": [
+        "10",
+        "8",
+        "7"
+      ]
+    },
+    {
+      "question": "In Rainbow 6 Siege, what is Ela and Zofia's last name?",
+      "correct_answer": "Bosak",
+      "incorrect_answers": [
+        "Kessikbayev",
+        "Zenaviev",
+        "Melnikova"
+      ]
+    },
+    {
+      "question": "In what year was Hearthstone released?",
+      "correct_answer": "2014",
+      "incorrect_answers": [
+        "2011",
+        "2013",
+        "2012"
+      ]
+    },
+    {
+      "question": "Which Animal Crossing game was for the Nintendo Wii?",
+      "correct_answer": "Animal Crossing: City Folk",
+      "incorrect_answers": [
+        "Animal Crossing: New Leaf",
+        "Animal Crossing: Wild World",
+        "Animal Crossing: Population Growing!"
+      ]
+    },
+    {
+      "question": "In Five Nights at Freddy's 1, how can you make Golden Freddy disappear?",
+      "correct_answer": "Enable cameras",
+      "incorrect_answers": [
+        "Turn on the light",
+        "Shut the door",
+        "Do nothing"
+      ]
+    }
+  ]
