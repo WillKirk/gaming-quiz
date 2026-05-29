@@ -25,7 +25,7 @@ async function fetchQuestions() {
   
     } catch (error) {
       console.error(error);
-      document.getElementById('question-text').textContent = 'Loading...';
+      renderApp();
       setTimeout(fetchQuestions, 3000);
     }
   }
@@ -131,27 +131,31 @@ function showScore() {
     const restartButton = document.createElement('button');
     restartButton.textContent = 'Play Again';
     restartButton.addEventListener('click', function() {
-      score = 0;
-      currentIndex = 0;
-      app.innerHTML = `
-        <h1 id="title">🎮 Gaming Quiz</h1>
-        <p id="score-tracker">Score: 0 / 10</p>
-        <div id="question-container">
-            <p id="question-counter"></p>
-            <p id="question-text"></p>
-            <div id="answers-container"></div>
-            <p id="feedback"></p>
-        </div>
-    `;
-      fetchQuestions();
-    });
+        score = 0;
+        currentIndex = 0;
+        renderApp();
+        fetchQuestions();
+      });
   
     app.appendChild(heading);
     app.appendChild(scoreText);
     app.appendChild(restartButton);
 }
 
+function renderApp() {
+    const app = document.getElementById('app');
+    app.innerHTML = `
+      <h1 id="title">🎮 Gaming Quiz</h1>
+      <p id="score-tracker">Score: 0 / 10</p>
+      <div id="question-container">
+        <p id="question-counter"></p>
+        <p id="question-text">Loading...</p>
+        <div id="answers-container"></div>
+        <p id="feedback"></p>
+      </div>
+    `;
+}
 
 
+renderApp();
 fetchQuestions();
-
