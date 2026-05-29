@@ -29,6 +29,8 @@ function shuffleAnswers(question){
 }
 
 function renderQuestion() {
+    document.getElementById('feedback').innerHTML = '';
+
     const question = questions[currentIndex];
     const answers = shuffleAnswers(question);
 
@@ -41,9 +43,50 @@ function renderQuestion() {
     for (let i = 0; i < answers.length; i++) {
         const button = document.createElement('button');
         button.textContent = answers[i];
+        button.addEventListener('click', function(){
+            handleAnswers(answers[i], question.correct_answer);
+        });
         answersContainer.appendChild(button);
     }
 }
+
+function handleAnswers(selected, correct) {
+    const buttons = document.querySelectorAll('#answers-container button');
+  
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+  
+      if (buttons[i].textContent === correct) {
+        buttons[i].style.backgroundColor = 'green';
+      } else {
+        buttons[i].style.backgroundColor = 'red';
+      }
+    }
+  
+    if (selected === correct) {
+      score = score + 1;
+    }
+  
+    const feedback = document.getElementById('feedback');
+    if (selected === correct) {
+      feedback.textContent = 'Correct!';
+    } else {
+      feedback.textContent = 'Incorrect!';
+    }
+  
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.addEventListener('click', function() {
+      currentIndex = currentIndex + 1;
+      if (currentIndex < questions.length) {
+        renderQuestion();
+      } else {
+        showScore();
+      }
+    });
+  
+    document.getElementById('feedback').appendChild(nextButton);
+  }
 
 async function fetchQuestions() {
     // const response = await fetch(API_URL);
